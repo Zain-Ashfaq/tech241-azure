@@ -126,3 +126,69 @@ An image is a template or snapshot of a pre-configured virtual machine.
 When creating a VM, the image serves as a blueprint, containing the operating system, applications, and configurations required for the virtual machine.
 Using images allows for quick and consistent deployment of virtual machines, ensuring that each instance starts from a known and standardized state.
 Images also enable the efficient scaling of VMs, as multiple instances can be created from the same base image.
+
+## Sign in to the Azure portal:
+
+Go to the Azure portal website and sign in with your Azure account.
+
+## Create a new resource group:
+
+Resource groups help you organize and manage your Azure resources.
+Click on "Resource groups" in the left-hand menu.
+Click the "Add" button to create a new resource group.
+Provide a name, select the subscription, and choose a region for the resource group.
+
+## Create a new virtual machine:
+
+In the Azure portal, click on "Virtual machines" in the left-hand menu.
+Click the "Add" button to create a new virtual machine.
+
+## Choose a base image:
+
+Azure provides a variety of pre-configured images for virtual machines.
+Select the desired operating system and version from the available options. (e.g., Windows Server, Ubuntu, CentOS)
+
+## Configure virtual machine settings:
+
+Provide a name for the virtual machine.
+Select the subscription and choose the resource group created in step 2.
+Select the appropriate region and availability options based on your requirements.
+
+## Choose a size:
+
+Select the appropriate size for your virtual machine based on the compute resources you need.
+Azure offers a range of options with varying CPU, memory, and disk configurations.
+Use the pricing calculator to estimate costs if needed.
+
+## Configure networking:
+
+Specify the virtual network and subnet for deploying the virtual machine.
+Create a new virtual network or use an existing one.
+Configure other networking settings such as public IP address and network security groups.
+
+## Set up storage:
+
+Configure the storage options for your virtual machine.
+Choose between Azure Managed Disks or an existing storage account.
+Specify the disk type, size, and other storage-related settings.
+
+## Configure advanced options:
+
+Azure provides additional advanced options such as extensions, monitoring, and diagnostics.
+Enable these features if needed or skip them for now.
+
+## Review and create:
+
+Review all the settings configured for the virtual machine.
+Once satisfied, click on the "Create" button to start the deployment process.
+
+## Wait for deployment:
+
+Azure will start deploying the virtual machine based on the provided configuration.
+The deployment process may take a few minutes to complete.
+
+## Access and manage your virtual machine:
+
+After the deployment is finished, you can access and manage your virtual machine through the Azure portal.
+Connect to the virtual machine using SSH.
+Perform any necessary configurations.
