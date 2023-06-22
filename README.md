@@ -164,3 +164,5 @@ Azure will start deploying the virtual machine based on the provided configurati
 ## Access and manage your virtual machine:
 
 After the deployment is finished, you can access and manage your virtual machine through the Azure portal. Connect to the virtual machine using SSH. Perform any necessary configurations.
+
+![Alt Text](zain-azure-vm-diagram.png)
