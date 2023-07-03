@@ -165,4 +165,145 @@ Azure will start deploying the virtual machine based on the provided configurati
 
 After the deployment is finished, you can access and manage your virtual machine through the Azure portal. Connect to the virtual machine using SSH. Perform any necessary configurations.
 
-![Alt Text](Azure-vm-diagram.png)
+![Alt Text](./Azure-vm-diagram.png)
+
+# blob storage
+
+resource group -> storage account -> container(s) -> blobs
+
+- redundancies: not essential for a program to run - backup copies of things incase of a disaster, you can fall back on it.
+
+# Azure Blob Storage
+
+## A. What is it?
+
+Azure Blob Storage is a service for storing large amounts of unstructured object data, such as images, documents, video etc.
+
+## B. Difference between Blob Storage and Hierarchical File Storage
+
+Blob Storage is an object storage system which treats files as blobs or 'Binary Large Objects'. It doesn't maintain a hierarchy or directory structure like traditional file systems in Linux/Windows/Mac. Each blob is stored in a flat namespace within a storage account and identified by a unique name.
+
+## C. Advantages/Disadvantages of Blob Storage
+
+Advantages:
+
+- **Scalability**: Blob storage can handle large amounts of data.
+- **Accessibility**: Data in blob storage is accessible from anywhere in the world via HTTP or HTTPS.
+- **Security**: Azure provides strong security measures to protect your data.
+
+Disadvantages:
+
+- **Cost**: Depending on the amount of data and access frequency, costs can be high.
+- **Complexity**: It can be more complex to manage and organize data due to the lack of a hierarchical structure.
+
+## D. Different Tiers and Cost
+
+- **Hot tier**: For data that is accessed frequently.
+- **Cool tier**: For data that is infrequently accessed and stored for at least 30 days.
+- **Archive tier**: For data that is rarely accessed and stored for at least 180 days.
+
+## E. Parts of Azure Blob Storage
+
+- **Account**: The Azure account under which the blob storage is created.
+- **Container**: A container provides a grouping of a set of blobs. All blobs must be in a container.
+- **Blobs**: A blob is a file of any type and size.
+
+The relationship is as follows: An account can contain multiple containers, and a container can hold multiple blobs.
+
+# Azure Block Blob Storage Redundancy Types
+
+Azure's block blob storage offers several types of data redundancy to ensure durability and high availability. Here are the different types:
+
+## 1. Locally Redundant Storage (LRS)
+
+LRS provides at least 99.999999999% (11 9's) durability of objects over a given year. With LRS, data is replicated within a single data center in a single region.
+
+## 2. Zone-Redundant Storage (ZRS)
+
+ZRS provides the same durability percentage as LRS. However, data is replicated synchronously across three Azure availability zones in the same region.
+
+## 3. Geo-Redundant Storage (GRS)
+
+GRS provides 99.99999999999999% (16 9's) durability and includes the replication of data to a secondary region that is hundreds of miles away from the primary region.
+
+## 4. Read-Access Geo-Redundant Storage (RA-GRS)
+
+RA-GRS provides the same durability as GRS. In addition, it allows for read access to data in the secondary region, providing higher availability.
+
+## 5. Geo-Zone-Redundant Storage (GZRS)
+
+GZRS combines the features of GRS and ZRS by providing replication across availability zones and to a secondary region.
+
+## 6. Read-Access Geo-Zone-Redundant Storage (RA-GZRS)
+
+RA-GZRS is similar to GZRS but also provides read access in the secondary region, offering the highest availability.
+
+Each redundancy option is designed to meet different needs and comes with its own cost implications. It's important to understand these differences when choosing the right redundancy for your application.
+
+# Creating a blob
+
+## 0. AZ Login
+
+```
+az login
+```
+
+then you put in your account credentials, if correct you should get this image
+
+![blob](./making%20a%20blob/0-%20az%20login.jpg)
+
+and this should appear in your terminal
+
+![blob](./making%20a%20blob/0.5-logging-in.PNG)
+
+## 1. Create a storage account
+
+```
+
+az storage account create --name tech241zainstorage --resource-group tech241 --location uksouth --sku Standard_LRS
+
+```
+
+![blob](./making%20a%20blob/1-%20storage%20accounts.jpg)
+
+## 2. List all storage accounts in a resource group
+
+```
+
+az storage account list --resource-group tech241
+
+```
+
+## 3. List all storage accounts in a resource group with specific attributes
+
+```
+
+az storage account list --resource-group tech241 --query "[].{Name:name, Location:location, Kind:kind}" --output table
+
+```
+
+![blob](./making%20a%20blob/3-listing-all-storage-containers.PNG)
+
+## 4. Create a container
+
+```
+
+az storage container create --account-name tech241zainstorage --name testcontainer
+
+```
+
+## 5. Upload a blob
+
+```
+
+az storage blob upload --account-name tech241zainstorage --container-name testcontainer --name newname.txt --file test.txt --auth-mode login
+
+```
+
+## 6. List all blobs in a container
+
+```
+
+az storage blob list --account-name tech241zainstorage --container-name testcontainer --output table --auth-mode login
+
+```
